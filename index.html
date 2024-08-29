@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="calculator">
+         <input placeholder="0" readonly type="text" id="display" class="display">
+         <div class="button-container">
+            <button class="clearBtn" onclick="clr(this)" >C</button>
+            <button onclick="buttonClick(this)" >7</button>
+            <button onclick="buttonClick(this)" >8</button>
+            <button onclick="buttonClick(this)" >+</button>
+            <button onclick="buttonClick(this)" >9</button>
+            <button onclick="buttonClick(this)" >4</button>
+            <button onclick="buttonClick(this)" >-</button>
+            <button onclick="buttonClick(this)" >5</button>
+            <button onclick="buttonClick(this)" >6</button>
+            <button onclick="buttonClick(this)" >x</button>
+            <button onclick="buttonClick(this)" >1</button>
+            <button onclick="buttonClick(this)" >2</button>
+            <button onclick="buttonClick(this)" >/</button>
+            <button onclick="ans()" >=</button>
+            <button onclick="buttonClick(this)" >3</button>
+            <button onclick="buttonClick(this)" >0</button>
+            <button onclick="buttonClick(this)" >.</button>
+         </div>
+        </div>
+    </div>
+
+  <script>
+
+    const display=document.getElementById('display');
+    let inputArray=[];
+    const operatorArray=['+','-','*','/','.'];
+    let tempValue='';
+    let dotRem=0;
+   function ans(){
+    var result=eval(inputArray.join(''))
+    inputArray.length=0;
+    inputArray.push(result);
+    display.value=result;
+
+   }
+
+    function clr(){
+        inputArray.length=0
+        display.value='';
+    }
+  
+    function showInput(temp){
+        let newArr=inputArray.map(value=>value=='*'?'x':value);
+        display.value=newArr.join('');
+    }
+
+  function buttonClick(inputValue){
+
+    tempValue=inputValue.innerText;
+    tempValue=(tempValue=='x')?'*':tempValue;
+    
+    if( inputArray.length==0 && (operatorArray.includes(tempValue))){
+      //not take input//   
+    }
+    else{
+        if(!(operatorArray.includes(inputArray[inputArray.length-1])&& operatorArray.includes(tempValue))){
+            tempValue=(tempValue=='x')?'*':tempValue;
+            
+            inputArray.push(tempValue);
+            showInput(inputArray)
+        }
+        else{
+            inputArray.pop();
+             tempValue=(tempValue=='x')?'*':tempValue;
+        
+            inputArray.push(tempValue);
+            showInput(inputArray)
+        }
+    }
+    console.log(inputArray);
+  }
+
+  console.log("don")
+  </script>
+</body>
+</html>
