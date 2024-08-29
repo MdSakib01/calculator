@@ -66,8 +66,6 @@ button{
     color: white;
 }
 
-
-
 @media (max-width:600px) {
     .calculator{
         height: 100%;
